@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="כיכר הלמידה - כולנה יחד | ساحة التعلم">
+    <title>כיכר הלמידה - כולנה יחד</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        /* Language Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            background: transparent;
+        }
+
+        .lang-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: var(--bg-secondary);
+        }
+
+        /* Bilingual text display */
+        .bilingual {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .bilingual .he {
+            font-size: 1em;
+        }
+
+        .bilingual .ar {
+            font-size: 0.9em;
+            opacity: 0.85;
+        }
+
+        /* Language visibility */
+        [data-lang="he"] .ar-only {
+            display: none !important;
+        }
+
+        [data-lang="ar"] .he-only {
+            display: none !important;
+        }
+
+        [data-lang="he"] .bilingual .ar {
+            display: none !important;
+        }
+
+        [data-lang="ar"] .bilingual .he {
+            display: none !important;
+        }
+
+        [data-lang="both"] .he-only,
+        [data-lang="both"] .ar-only {
+            display: block;
+        }
+    </style>
+</head>
+
+<body data-lang="both">
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <button class="lang-btn" data-set-lang="he">עברית</button>
+        <button class="lang-btn active" data-set-lang="both">שתיהן</button>
+        <button class="lang-btn" data-set-lang="ar">العربية</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <a href="index.html"
+                        style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="logo-icon">🤝</span>
+                        <span class="logo-text">קולנו יחד</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">בית</a></li>
+                    <li><a href="schools.html" class="nav-link">בתי ספר שותפים</a></li>
+                    <li><a href="plaza.html" class="nav-link active">כיכר הלמידה</a></li>
+                    <li><a href="join.html" class="nav-link">הצטרפו אלינו</a></li>
+                    <li><a href="index.html#contact" class="nav-link">צור קשר</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Plaza Header -->
+    <section class="plaza-header">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">
+                    <span class="he-only">כיכר הלמידה המשותפת</span>
+                    <span class="ar-only">ساحة التعلم المشتركة</span>
+                </span>
+                <h1 class="section-title bilingual">
+                    <span class="he">ברוכים הבאים לכיכר הלמידה 🎓</span>
+                    <span class="ar">مرحباً في ساحة التعلم</span>
+                </h1>
+                <p class="section-subtitle bilingual">
+                    <span class="he">מקום לתקשורת ושיתוף פעולה בין כל בתי הספר השותפים</span>
+                    <span class="ar">مكان للتواصل والتعاون بين جميع المدارس الشريكة</span>
+                </p>
+            </div>
+
+            <!-- Plaza Navigation Tabs -->
+            <div class="plaza-tabs">
+                <button class="plaza-tab-btn active" data-tab="public">
+                    <span class="tab-icon">🏛️</span>
+                    <span class="tab-text bilingual">
+                        <span class="he">הכיכר הציבורית</span>
+                        <span class="ar">الساحة العامة</span>
+                    </span>
+                </button>
+                <button class="plaza-tab-btn" data-tab="rooms">
+                    <span class="tab-icon">🚪</span>
+                    <span class="tab-text bilingual">
+                        <span class="he">חדרי לימוד</span>
+                        <span class="ar">غرف التعلم</span>
+                    </span>
+                </button>
+                <button class="plaza-tab-btn" data-tab="resources">
+                    <span class="tab-icon">📚</span>
+                    <span class="tab-text bilingual">
+                        <span class="he">ספריית משאבים</span>
+                        <span class="ar">مكتبة الموارد</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Public Plaza Section -->
+    <section id="public" class="plaza-section active">
+        <div class="container">
+            <div class="plaza-content">
+                <!-- Sidebar -->
+                <aside class="plaza-sidebar">
+                    <div class="sidebar-card">
+                        <h3 class="bilingual">
+                            <span class="he">📢 הודעות</span>
+                            <span class="ar">📢 إعلانات</span>
+                        </h3>
+                        <div id="announcements" class="announcements-list">
+                            <div class="announcement-item">
+                                <span class="announcement-badge">
+                                    <span class="he-only">חדש</span>
+                                    <span class="ar-only">جديد</span>
+                                </span>
+                                <p class="bilingual">
+                                    <span class="he">ברוכים הבאים לכיכר הלמידה החדשה!</span>
+                                    <span class="ar">مرحباً بكم في ساحة التعلم الجديدة!</span>
+                                </p>
+                                <span class="announcement-date">
+                                    <span class="he-only">היום</span>
+                                    <span class="ar-only">اليوم</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3 class="bilingual">
+                            <span class="he">🏫 בתי ספר פעילים</span>
+                            <span class="ar">🏫 المدارس النشطة</span>
+                        </h3>
+                        <div id="activeSchools" class="schools-list">
+                            <p class="loading-text bilingual">
+                                <span class="he">טוען...</span>
+                                <span class="ar">جاري التحميل...</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card stats-card">
+                        <h3 class="bilingual">
+                            <span class="he">📊 סטטיסטיקות</span>
+                            <span class="ar">📊 إحصائيات</span>
+                        </h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-value" id="postsCount">0</span>
+                                <span class="stat-label bilingual">
+                                    <span class="he">פוסטים</span>
+                                    <span class="ar">منشور</span>
+                                </span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="schoolsCount">0</span>
+                                <span class="stat-label bilingual">
+                                    <span class="he">בתי ספר</span>
+                                    <span class="ar">مدرسة</span>
+                                </span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="discussionsCount">0</span>
+                                <span class="stat-label bilingual">
+                                    <span class="he">דיונים</span>
+                                    <span class="ar">نقاش</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Feed -->
+                <main class="plaza-feed">
+                    <!-- New Post Form -->
+                    <div class="new-post-card" id="newPostCard">
+                        <div class="new-post-header">
+                            <div class="user-avatar">👤</div>
+                            <input type="text" id="postTitleInput" placeholder="כותרת הפוסט... / عنوان المنشور..."
+                                class="post-title-input">
+                        </div>
+                        <textarea id="postContentInput"
+                            placeholder="שתפו משהו עם בתי הספר האחרים... / شارك شيئاً مع المدارس الأخرى..."
+                            class="post-content-input"></textarea>
+                        <div class="new-post-footer">
+                            <div class="post-options">
+                                <button class="post-option-btn" title="הוסף תמונה / إضافة صورة">📷</button>
+                                <button class="post-option-btn" title="הוסף קישור / إضافة رابط">🔗</button>
+                                <button class="post-option-btn" title="הוסף קובץ / إضافة ملف">📎</button>
+                            </div>
+                            <button id="publishPostBtn" class="btn btn-primary">
+                                <span class="he-only">פרסם</span>
+                                <span class="ar-only">نشر</span>
+                            </button>
+                        </div>
+                        <p id="loginPrompt" class="login-prompt hidden bilingual">
+                            <span class="he">יש <a href="auth.html">להתחבר</a> כדי לפרסם תוכן</span>
+                            <span class="ar">يجب <a href="auth.html">تسجيل الدخول</a> لنشر محتوى</span>
+                        </p>
+                    </div>
+
+                    <!-- Posts Feed -->
+                    <div id="postsFeed" class="posts-feed">
+                        <div class="loading-spinner">
+                            <div class="spinner"></div>
+                            <p class="bilingual">
+                                <span class="he">טוען פוסטים...</span>
+                                <span class="ar">جاري تحميل المنشورات...</span>
+                            </p>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Rooms Section -->
+    <section id="rooms" class="plaza-section">
+        <div class="container">
+            <div class="rooms-header">
+                <h2 class="bilingual">
+                    <span class="he">חדרי לימוד פרטיים</span>
+                    <span class="ar">غرف التعلم الخاصة</span>
+                </h2>
+                <p class="bilingual">
+                    <span class="he">תקשורת עם בית הספר השותף שלכם בחדר פרטי</span>
+                    <span class="ar">تواصل مع مدرستك الشريكة في غرفة خاصة</span>
+                </p>
+            </div>
+
+            <div class="rooms-grid" id="roomsGrid">
+                <!-- Room cards will be loaded here -->
+                <div class="empty-state">
+                    <span class="empty-icon">🚪</span>
+                    <h3 class="bilingual">
+                        <span class="he">אין עדיין חדרים</span>
+                        <span class="ar">لا توجد غرف بعد</span>
+                    </h3>
+                    <p class="bilingual">
+                        <span class="he">חדרים פרטיים ייווצרו כאשר בית הספר שלכם יחובר לבית ספר שותף</span>
+                        <span class="ar">سيتم إنشاء غرف خاصة عندما يتم ربط مدرستك بمدرسة شريكة</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Room Chat Modal -->
+            <div id="roomModal" class="room-modal hidden">
+                <div class="room-modal-content">
+                    <div class="room-modal-header">
+                        <h3 id="roomTitle" class="bilingual">
+                            <span class="he">חדר לימוד</span>
+                            <span class="ar">غرفة التعلم</span>
+                        </h3>
+                        <button class="close-modal-btn" id="closeRoomModal">✕</button>
+                    </div>
+                    <div class="room-chat" id="roomChat">
+                        <!-- Messages will be loaded here -->
+                    </div>
+                    <div class="room-input-area">
+                        <input type="text" id="roomMessageInput"
+                            placeholder="כתבו את ההודעה שלכם... / اكتب رسالتك هنا...">
+                        <button id="sendRoomMessage" class="btn btn-primary">
+                            <span class="he-only">שלח</span>
+                            <span class="ar-only">إرسال</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="plaza-section">
+        <div class="container">
+            <div class="resources-header">
+                <h2 class="bilingual">
+                    <span class="he">ספריית משאבים לימודיים</span>
+                    <span class="ar">مكتبة الموارد التعليمية</span>
+                </h2>
+                <p class="bilingual">
+                    <span class="he">משאבים משותפים לכל בתי הספר השותפים</span>
+                    <span class="ar">موارد مشتركة لجميع المدارس الشريكة</span>
+                </p>
+            </div>
+
+            <div class="resources-categories">
+                <button class="resource-category-btn active" data-category="all">
+                    <span class="he-only">הכל</span>
+                    <span class="ar-only">الكل</span>
+                </button>
+                <button class="resource-category-btn" data-category="documents">
+                    📄 <span class="he-only">מסמכים</span><span class="ar-only">مستندات</span>
+                </button>
+                <button class="resource-category-btn" data-category="videos">
+                    🎬 <span class="he-only">סרטונים</span><span class="ar-only">فيديوهات</span>
+                </button>
+                <button class="resource-category-btn" data-category="links">
+                    🔗 <span class="he-only">קישורים</span><span class="ar-only">روابط</span>
+                </button>
+                <button class="resource-category-btn" data-category="activities">
+                    🎯 <span class="he-only">פעילויות</span><span class="ar-only">أنشطة</span>
+                </button>
+            </div>
+
+            <div class="resources-grid" id="resourcesGrid">
+                <!-- Sample resources -->
+                <div class="resource-card">
+                    <div class="resource-icon">📄</div>
+                    <h4 class="bilingual">
+                        <span class="he">מדריך לשיתוף פעולה בין בתי ספר</span>
+                        <span class="ar">دليل التعاون بين المدارس</span>
+                    </h4>
+                    <p class="bilingual">
+                        <span class="he">כיצד לבנות שותפות מוצלחת בין בתי ספר</span>
+                        <span class="ar">كيفية بناء شراكة ناجحة بين المدارس</span>
+                    </p>
+                    <span class="resource-meta">PDF • 2.5 MB</span>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎬</div>
+                    <h4 class="bilingual">
+                        <span class="he">סרטון היכרות</span>
+                        <span class="ar">فيديو تعريفي</span>
+                    </h4>
+                    <p class="bilingual">
+                        <span class="he">הכירו את פרויקט כולנא יאחד</span>
+                        <span class="ar">تعرف على مشروع كولانا ياحد</span>
+                    </p>
+                    <span class="resource-meta">
+                        <span class="he-only">סרטון • 5 דקות</span>
+                        <span class="ar-only">فيديو • 5 دقائق</span>
+                    </span>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎯</div>
+                    <h4 class="bilingual">
+                        <span class="he">פעילויות אינטראקטיביות</span>
+                        <span class="ar">أنشطة تفاعلية</span>
+                    </h4>
+                    <p class="bilingual">
+                        <span class="he">משחקים ופעילויות להיכרות בין תלמידים</span>
+                        <span class="ar">ألعاب وأنشطة للتعارف بين الطلاب</span>
+                    </p>
+                    <span class="resource-meta">
+                        <span class="he-only">פעילויות • 10 אירועים</span>
+                        <span class="ar-only">أنشطة • 10 فعاليات</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 קולנו יחד. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="firebase-config.js"></script>
+    <script src="plaza.js"></script>
+    <script>
+        // Language Switcher
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.setLang;
+                document.body.dataset.lang = lang;
+
+                // Update active button
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Save preference
+                localStorage.setItem('preferredLang', lang);
+            });
+        });
+
+        // Load saved language preference
+        const savedLang = localStorage.getItem('preferredLang');
+        if (savedLang) {
+            document.body.dataset.lang = savedLang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.setLang === savedLang);
+            });
+        }
+    </script>
+</body>
+
+</html>
