@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="הצטרפו אלינו - כולנה יחד">
+    <title>הצטרפו אלינו - כולנה יחד</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <a href="index.html"
+                        style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="logo-icon">🤝</span>
+                        <span class="logo-text">קולנו יחד</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">בית</a></li>
+                    <li><a href="schools.html" class="nav-link">בתי ספר שותפים</a></li>
+                    <li><a href="join.html" class="nav-link active">הצטרפו אלינו</a></li>
+                    <li><a href="index.html#contact" class="nav-link">צור קשר</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Join Section -->
+    <section class="join-page-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">הצטרפו אלינו</span>
+                <h1 class="section-title">בואו להיות חלק מהשינוי</h1>
+                <p class="section-subtitle">בחרו את הקטגוריה המתאימה לכם ומלאו את הטופס</p>
+            </div>
+
+            <!-- Registration Type Selection -->
+            <div class="registration-tabs">
+                <button class="reg-tab-btn active" data-form="teacher">👩‍🏫 אני מורה מחפש/ת עבודה</button>
+                <button class="reg-tab-btn" data-form="school-partner">🏫 בית ספר מעוניין בשותפות</button>
+                <button class="reg-tab-btn" data-form="school-hiring">📚 בית ספר מחפש מורים</button>
+            </div>
+
+            <!-- Teacher Registration Form -->
+            <div id="teacher" class="reg-form-container active">
+                <h2>הרשמה למורים</h2>
+                <p>מורות ומורים המעוניינים להצטרף למאגר המורים שלנו</p>
+                <form id="teacherForm" class="registration-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherName">שם מלא *</label>
+                            <input type="text" id="teacherName" name="name" required placeholder="הכנס/י את שמך המלא">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherEmail">אימייל *</label>
+                            <input type="email" id="teacherEmail" name="email" required placeholder="example@email.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherPhone">טלפון *</label>
+                            <input type="tel" id="teacherPhone" name="phone" required placeholder="050-000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherSubject">תחום הוראה *</label>
+                            <input type="text" id="teacherSubject" name="subject" required
+                                placeholder="מתמטיקה, אנגלית, וכו'">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherExperience">שנות ניסיון</label>
+                        <input type="number" id="teacherExperience" name="experience" min="0"
+                            placeholder="מספר שנות ניסיון">
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherMessage">מידע נוסף</label>
+                        <textarea id="teacherMessage" name="message" rows="3"
+                            placeholder="ספר/י לנו קצת על עצמך..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">שלח הרשמה</button>
+                </form>
+            </div>
+
+            <!-- School Partnership Form -->
+            <div id="school-partner" class="reg-form-container">
+                <h2>בית ספר מעוניין בשותפות</h2>
+                <p>בתי ספר המעוניינים להצטרף לפרויקט החיים המשותפים</p>
+                <form id="schoolPartnerForm" class="registration-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="partnerSchoolName">שם בית הספר *</label>
+                            <input type="text" id="partnerSchoolName" name="schoolName" required
+                                placeholder="שם בית הספר">
+                        </div>
+                        <div class="form-group">
+                            <label for="partnerSchoolLocation">עיר/יישוב *</label>
+                            <input type="text" id="partnerSchoolLocation" name="location" required
+                                placeholder="עיר או יישוב">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="partnerContactName">שם איש קשר *</label>
+                            <input type="text" id="partnerContactName" name="contactName" required
+                                placeholder="שם מנהל/ת או רכז/ת">
+                        </div>
+                        <div class="form-group">
+                            <label for="partnerContactEmail">אימייל *</label>
+                            <input type="email" id="partnerContactEmail" name="email" required
+                                placeholder="example@school.edu">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerContactPhone">טלפון *</label>
+                        <input type="tel" id="partnerContactPhone" name="phone" required placeholder="050-000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerMessage">מידע נוסף</label>
+                        <textarea id="partnerMessage" name="message" rows="3"
+                            placeholder="ספרו לנו על בית הספר ועל הציפיות שלכם מהשותפות..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">שלח בקשה</button>
+                </form>
+            </div>
+
+            <!-- School Hiring Form -->
+            <div id="school-hiring" class="reg-form-container">
+                <h2>בית ספר מחפש מורים</h2>
+                <p>בתי ספר המעוניינים לקלוט מורים מהחברה הערבית</p>
+                <form id="schoolHiringForm" class="registration-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hiringSchoolName">שם בית הספר *</label>
+                            <input type="text" id="hiringSchoolName" name="schoolName" required
+                                placeholder="שם בית הספר">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringSchoolLocation">עיר/יישוב *</label>
+                            <input type="text" id="hiringSchoolLocation" name="location" required
+                                placeholder="עיר או יישוב">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hiringContactName">שם איש קשר *</label>
+                            <input type="text" id="hiringContactName" name="contactName" required
+                                placeholder="שם מנהל/ת או רכז/ת">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringContactEmail">אימייל *</label>
+                            <input type="email" id="hiringContactEmail" name="email" required
+                                placeholder="example@school.edu">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="hiringContactPhone">טלפון *</label>
+                        <input type="tel" id="hiringContactPhone" name="phone" required placeholder="050-000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="hiringPosition">תפקיד/מקצוע מבוקש *</label>
+                        <input type="text" id="hiringPosition" name="position" required
+                            placeholder="מורה לאנגלית, מתמטיקה וכו'">
+                    </div>
+                    <div class="form-group">
+                        <label for="hiringMessage">מידע נוסף</label>
+                        <textarea id="hiringMessage" name="message" rows="3"
+                            placeholder="פרטים נוספים על המשרה והדרישות..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">שלח בקשה</button>
+                </form>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message hidden">
+                <div class="success-icon">✅</div>
+                <h2>תודה על הפנייה!</h2>
+                <p>קיבלנו את בקשתך ונחזור אליך בהקדם.</p>
+                <a href="index.html" class="btn btn-primary">חזרה לדף הבית</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 קולנו יחד. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="firebase-config.js"></script>
+    <script>
+        // Tab switching
+        const regTabs = document.querySelectorAll('.reg-tab-btn');
+        const regForms = document.querySelectorAll('.reg-form-container');
+
+        regTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                regTabs.forEach(t => t.classList.remove('active'));
+                regForms.forEach(f => f.classList.remove('active'));
+
+                tab.classList.add('active');
+                const formId = tab.getAttribute('data-form');
+                document.getElementById(formId).classList.add('active');
+            });
+        });
+
+        // Form submission handlers
+        async function submitForm(formId, collectionName, formElement) {
+            const formData = new FormData(formElement);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+            data.status = 'pending';
+
+            const submitBtn = formElement.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'שולח...';
+            submitBtn.disabled = true;
+
+            try {
+                await firebaseDB.collection(collectionName).add(data);
+
+                // Show success message
+                document.querySelectorAll('.reg-form-container').forEach(f => f.classList.remove('active'));
+                document.querySelector('.registration-tabs').style.display = 'none';
+                document.getElementById('successMessage').classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('אירעה שגיאה. נסו שוב מאוחר יותר.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Teacher form
+        document.getElementById('teacherForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitForm('teacher', 'teachers', e.target);
+        });
+
+        // School partner form
+        document.getElementById('schoolPartnerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitForm('school-partner', 'school_partners', e.target);
+        });
+
+        // School hiring form
+        document.getElementById('schoolHiringForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitForm('school-hiring', 'schools', e.target);
+        });
+    </script>
+</body>
+
+</html>
