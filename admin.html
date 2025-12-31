@@ -45,59 +45,45 @@
             <div class="admin-header">
                 <h1 class="admin-title">لوحة التحكم</h1>
                 <div class="admin-tabs">
-                    <button class="tab-btn active" data-tab="messages">الرسائل</button>
-                    <button class="tab-btn" data-tab="teachers">المعلمين المسجلين</button>
-                    <button class="tab-btn" data-tab="schools">المدراس</button>
+                    <button class="tab-btn active" data-tab="teachers">👩‍🏫 المعلمين المسجلين</button>
+                    <button class="tab-btn" data-tab="hiring">📚 طلبات توظيف من المدارس</button>
+                    <button class="tab-btn" data-tab="partners">🏫 مدارس الحياة المشتركة</button>
+                    <button class="tab-btn" data-tab="messages">✉️ الرسائل</button>
                 </div>
             </div>
 
-            <div id="messages" class="tab-content active">
-                <h2 class="section-title">الرسائل المستلمة</h2>
+            <!-- Teachers Tab -->
+            <div id="teachers" class="tab-content active">
+                <h2 class="section-title">👩‍🏫 المعلمين الذين سجلوا للبحث عن وظيفة</h2>
+                <div id="teachersContainer" class="messages-container">
+                    <div class="loading-message">جاري تحميل بيانات المعلمين...</div>
+                </div>
+            </div>
+
+            <!-- School Hiring Requests Tab -->
+            <div id="hiring" class="tab-content">
+                <h2 class="section-title">📚 المدارس التي تبحث عن معلمين</h2>
+                <div id="hiringContainer" class="messages-container">
+                    <div class="loading-message">جاري تحميل طلبات التوظيف...</div>
+                </div>
+            </div>
+
+            <!-- Schools for Shared Life Tab -->
+            <div id="partners" class="tab-content">
+                <h2 class="section-title">🏫 المدارس المعنية بالحياة المشتركة</h2>
+                <div id="partnersContainer" class="messages-container">
+                    <div class="loading-message">جاري تحميل بيانات المدارس...</div>
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <div id="messages" class="tab-content">
+                <h2 class="section-title">✉️ الرسائل المستلمة</h2>
                 <div id="messagesContainer" class="messages-container">
                     <div class="loading-message">جاري تحميل الرسائل...</div>
                 </div>
             </div>
-
-            <div id="teachers" class="tab-content">
-                <h2 class="section-title">المعلمين المسجلين</h2>
-                <div id="teachersContainer" class="messages-container">
-                    <div class="loading-message">جاري تحميل قائمة المعلمين...</div>
-                </div>
-            </div>
-
-            <div id="schools" class="tab-content">
-                <h2 class="section-title">إدارة المدارس الشريكة</h2>
-
-                <!-- Add School Form -->
-                <div class="add-school-form">
-                    <h3>➕ إضافة مدرسة جديدة</h3>
-                    <form id="addSchoolForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="schoolName">اسم المدرسة *</label>
-                                <input type="text" id="schoolName" name="schoolName" required
-                                    placeholder="مثال: مدرسة السلام">
-                            </div>
-                            <div class="form-group">
-                                <label for="schoolLocation">الموقع *</label>
-                                <input type="text" id="schoolLocation" name="schoolLocation" required
-                                    placeholder="مثال: تل أبيب">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="schoolDescription">وصف (اختياري)</label>
-                            <textarea id="schoolDescription" name="schoolDescription" rows="2"
-                                placeholder="معلومات إضافية عن المدرسة..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">إضافة المدرسة</button>
-                    </form>
-                </div>
-
-                <h3 style="margin-bottom: 1rem;">📋 قائمة المدارس المضافة</h3>
-                <div id="schoolsContainer" class="messages-container">
-                    <div class="loading-message">جاري تحميل قائمة المدارس...</div>
-                </div>
-            </div>
+        </div>
         </div>
     </section>
 

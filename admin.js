@@ -24,10 +24,11 @@ checkAuthState((user) => {
         userName.textContent = `مرحباً, ${user.displayName || user.email}`;
     }
 
-    // Load messages
-    loadMessages();
+    // Load all data
     loadTeachers();
-    loadPartnerSchools();
+    loadHiringRequests();
+    loadSchoolPartners();
+    loadMessages();
 
     // Tab Logic
     const tabs = document.querySelectorAll('.tab-btn');
@@ -126,7 +127,7 @@ async function loadTeachers() {
     if (!container) return;
 
     try {
-        const snapshot = await firebaseDB.collection('teachers').get();
+        const snapshot = await firebaseDB.collection('teachers').orderBy('createdAt', 'desc').get();
 
         if (snapshot.empty) {
             container.innerHTML = '<div class="loading-message">لا يوجد معلمين مسجلين حتى الآن</div>';
@@ -139,8 +140,10 @@ async function loadTeachers() {
                     <tr>
                         <th>الاسم</th>
                         <th>التخصص</th>
-                        <th>سنوات الخبرة</th>
-                        <th>معلومات الاتصال</th>
+                        <th>الخبرة</th>
+                        <th>نسبة الوظيفة</th>
+                        <th>الهاتف</th>
+                        <th>الإيميل</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -148,12 +151,15 @@ async function loadTeachers() {
 
         snapshot.forEach((doc) => {
             const data = doc.data();
+            const fullName = `${data.firstName || ''} ${data.lastName || ''}`.trim() || data.name || '-';
             tableHTML += `
                 <tr>
-                    <td>${escapeHtml(data.name || '-')}</td>
-                    <td>${escapeHtml(data.subject || '-')}</td>
+                    <td>${escapeHtml(fullName)}</td>
+                    <td>${escapeHtml(data.mainSubject || data.subject || '-')}</td>
                     <td>${escapeHtml(data.experience || '0')}</td>
-                    <td><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td>
+                    <td>${escapeHtml(data.jobPercentage || '-')}%</td>
+                    <td><a href="tel:${escapeHtml(data.phone)}">${escapeHtml(data.phone || '-')}</a></td>
+                    <td><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email || '-')}</a></td>
                 </tr>
             `;
         });
@@ -163,7 +169,109 @@ async function loadTeachers() {
 
     } catch (error) {
         console.error('Error loading teachers:', error);
-        container.innerHTML = '<div class="loading-message">لا يوجد معلمين مسجلين حتى الآن (أو حدث خطأ)</div>';
+        container.innerHTML = '<div class="loading-message">حدث خطأ أثناء تحميل البيانات</div>';
+    }
+}
+
+// Load School Hiring Requests
+async function loadHiringRequests() {
+    const container = document.getElementById('hiringContainer');
+    if (!container) return;
+
+    try {
+        const snapshot = await firebaseDB.collection('school_hiring_requests').orderBy('createdAt', 'desc').get();
+
+        if (snapshot.empty) {
+            container.innerHTML = '<div class="loading-message">لا توجد طلبات توظيف حتى الآن</div>';
+            return;
+        }
+
+        let tableHTML = `
+            <table class="messages-table">
+                <thead>
+                    <tr>
+                        <th>اسم المدرسة</th>
+                        <th>المدينة</th>
+                        <th>الوظيفة المطلوبة</th>
+                        <th>نسبة المשرה</th>
+                        <th>جهة الاتصال</th>
+                        <th>الهاتف</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            tableHTML += `
+                <tr>
+                    <td>${escapeHtml(data.schoolName || '-')}</td>
+                    <td>${escapeHtml(data.city || '-')}</td>
+                    <td>${escapeHtml(data.job1Subject || '-')}</td>
+                    <td>${escapeHtml(data.job1Percentage || '-')}%</td>
+                    <td>${escapeHtml(data.contactName || '-')}</td>
+                    <td><a href="tel:${escapeHtml(data.contactPhone)}">${escapeHtml(data.contactPhone || '-')}</a></td>
+                </tr>
+            `;
+        });
+
+        tableHTML += `</tbody></table>`;
+        container.innerHTML = tableHTML;
+
+    } catch (error) {
+        console.error('Error loading hiring requests:', error);
+        container.innerHTML = '<div class="loading-message">حدث خطأ أثناء تحميل البيانات</div>';
+    }
+}
+
+// Load School Partners (interested in shared life)
+async function loadSchoolPartners() {
+    const container = document.getElementById('partnersContainer');
+    if (!container) return;
+
+    try {
+        const snapshot = await firebaseDB.collection('school_partners').orderBy('createdAt', 'desc').get();
+
+        if (snapshot.empty) {
+            container.innerHTML = '<div class="loading-message">لا توجد مدارس مسجلة للحياة المشتركة حتى الآن</div>';
+            return;
+        }
+
+        let tableHTML = `
+            <table class="messages-table">
+                <thead>
+                    <tr>
+                        <th>اسم المدرسة</th>
+                        <th>المدينة</th>
+                        <th>القטاع</th>
+                        <th>اسم المدير</th>
+                        <th>الهاتف</th>
+                        <th>الإيميل</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            tableHTML += `
+                <tr>
+                    <td>${escapeHtml(data.schoolName || '-')}</td>
+                    <td>${escapeHtml(data.city || '-')}</td>
+                    <td>${escapeHtml(data.sector || '-')}</td>
+                    <td>${escapeHtml(data.principalName || '-')}</td>
+                    <td><a href="tel:${escapeHtml(data.principalPhone)}">${escapeHtml(data.principalPhone || '-')}</a></td>
+                    <td><a href="mailto:${escapeHtml(data.principalEmail)}">${escapeHtml(data.principalEmail || '-')}</a></td>
+                </tr>
+            `;
+        });
+
+        tableHTML += `</tbody></table>`;
+        container.innerHTML = tableHTML;
+
+    } catch (error) {
+        console.error('Error loading school partners:', error);
+        container.innerHTML = '<div class="loading-message">حدث خطأ أثناء تحميل البيانات</div>';
     }
 }
 
