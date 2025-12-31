@@ -442,7 +442,7 @@
             formData.forEach((value, key) => {
                 data[key] = value;
             });
-            data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+            data.createdAt = new Date().toISOString();
             data.status = 'pending';
 
             const submitBtn = formElement.querySelector('button[type="submit"]');
@@ -459,10 +459,8 @@
                 document.getElementById('successMessage').classList.remove('hidden');
 
             } catch (error) {
-                console.error('Error submitting form:', error);
-                console.error('Error code:', error.code);
-                console.error('Error message:', error.message);
-                alert('שגיאה: ' + error.message);
+                console.error('Full error:', error);
+                alert('שגיאה: ' + (error.code || '') + ' - ' + (error.message || 'Unknown error'));
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             }
