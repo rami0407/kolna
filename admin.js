@@ -127,7 +127,7 @@ async function loadTeachers() {
     if (!container) return;
 
     try {
-        const snapshot = await firebaseDB.collection('teachers').orderBy('createdAt', 'desc').get();
+        const snapshot = await firebaseDB.collection('teachers').get();
 
         if (snapshot.empty) {
             container.innerHTML = '<div class="loading-message">لا يوجد معلمين مسجلين حتى الآن</div>';
@@ -179,7 +179,7 @@ async function loadHiringRequests() {
     if (!container) return;
 
     try {
-        const snapshot = await firebaseDB.collection('school_hiring_requests').orderBy('createdAt', 'desc').get();
+        const snapshot = await firebaseDB.collection('school_hiring_requests').get();
 
         if (snapshot.empty) {
             container.innerHTML = '<div class="loading-message">لا توجد طلبات توظيف حتى الآن</div>';
@@ -230,7 +230,7 @@ async function loadSchoolPartners() {
     if (!container) return;
 
     try {
-        const snapshot = await firebaseDB.collection('school_partners').orderBy('createdAt', 'desc').get();
+        const snapshot = await firebaseDB.collection('school_partners').get();
 
         if (snapshot.empty) {
             container.innerHTML = '<div class="loading-message">لا توجد مدارس مسجلة للحياة المشتركة حتى الآن</div>';
