@@ -53,6 +53,7 @@
             <div class="registration-tabs">
                 <button class="reg-tab-btn active" data-form="teacher">👩‍🏫 מורה מחפש/ת עבודה</button>
                 <button class="reg-tab-btn" data-form="school-partner">🏫 בית ספר מעוניין בחיים משותפים</button>
+                <button class="reg-tab-btn" data-form="school-hiring">📚 בית ספר מחפש מורים</button>
             </div>
 
             <!-- ===== TEACHER REGISTRATION FORM ===== -->
@@ -400,6 +401,209 @@
                 </form>
             </div>
 
+            <!-- ===== SCHOOL HIRING FORM ===== -->
+            <div id="school-hiring" class="reg-form-container">
+                <h2>📚 טופס דרושים למורים</h2>
+                <p>בתי ספר המחפשים לגייס מורים מהחברה הערבית</p>
+
+                <form id="schoolHiringForm" class="registration-form">
+                    <!-- School Information -->
+                    <h3 class="form-section-title">פרטי בית הספר</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hiringSchoolName">שם בית הספר *</label>
+                            <input type="text" id="hiringSchoolName" name="schoolName" required
+                                placeholder="שם בית הספר">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringSchoolType">סוג בית הספר *</label>
+                            <select id="hiringSchoolType" name="schoolType" required>
+                                <option value="">בחר/י</option>
+                                <option value="elementary">יסודי</option>
+                                <option value="middle">חט"ב</option>
+                                <option value="high">תיכון</option>
+                                <option value="comprehensive">מקיף (יסודי-תיכון)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hiringSchoolCity">עיר *</label>
+                            <input type="text" id="hiringSchoolCity" name="city" required placeholder="עיר">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringSchoolAddress">כתובת מלאה *</label>
+                            <input type="text" id="hiringSchoolAddress" name="address" required
+                                placeholder="רחוב ומספר">
+                        </div>
+                    </div>
+
+                    <!-- Contact Person -->
+                    <h3 class="form-section-title">איש קשר</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hiringContactName">שם איש קשר *</label>
+                            <input type="text" id="hiringContactName" name="contactName" required placeholder="שם מלא">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringContactRole">תפקיד *</label>
+                            <input type="text" id="hiringContactRole" name="contactRole" required
+                                placeholder="מנהל/ת, רכז/ת וכו'">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hiringContactPhone">טלפון *</label>
+                            <input type="tel" id="hiringContactPhone" name="contactPhone" required
+                                placeholder="050-000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="hiringContactEmail">אימייל *</label>
+                            <input type="email" id="hiringContactEmail" name="contactEmail" required
+                                placeholder="contact@school.edu">
+                        </div>
+                    </div>
+
+                    <!-- Job Opening 1 -->
+                    <h3 class="form-section-title">משרה מבוקשת #1</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="job1Subject">מקצוע הוראה *</label>
+                            <select id="job1Subject" name="job1Subject" required>
+                                <option value="">בחר/י מקצוע</option>
+                                <option value="math">מתמטיקה</option>
+                                <option value="english">אנגלית</option>
+                                <option value="arabic">ערבית</option>
+                                <option value="hebrew">עברית</option>
+                                <option value="science">מדעים</option>
+                                <option value="physics">פיזיקה</option>
+                                <option value="chemistry">כימיה</option>
+                                <option value="biology">ביולוגיה</option>
+                                <option value="history">היסטוריה</option>
+                                <option value="geography">גיאוגרפיה</option>
+                                <option value="literature">ספרות</option>
+                                <option value="art">אמנות</option>
+                                <option value="music">מוזיקה</option>
+                                <option value="pe">חינוך גופני</option>
+                                <option value="special_ed">חינוך מיוחד</option>
+                                <option value="computer">מחשבים</option>
+                                <option value="other">אחר</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="job1AgeGroup">שכבת גיל *</label>
+                            <select id="job1AgeGroup" name="job1AgeGroup" required>
+                                <option value="">בחר/י</option>
+                                <option value="elementary">יסודי (א'-ו')</option>
+                                <option value="middle">חט"ב (ז'-ט')</option>
+                                <option value="high">תיכון (י'-י"ב)</option>
+                                <option value="all">כל השכבות</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="job1Percentage">אחוז משרה *</label>
+                            <select id="job1Percentage" name="job1Percentage" required>
+                                <option value="">בחר/י</option>
+                                <option value="100">משרה מלאה (100%)</option>
+                                <option value="75">75%</option>
+                                <option value="50">חצי משרה (50%)</option>
+                                <option value="33">שליש משרה (33%)</option>
+                                <option value="25">25%</option>
+                                <option value="flexible">גמיש</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="job1StartDate">תאריך התחלה רצוי</label>
+                            <select id="job1StartDate" name="job1StartDate">
+                                <option value="">בחר/י</option>
+                                <option value="immediately">מיידי</option>
+                                <option value="next_semester">סמסטר הבא</option>
+                                <option value="next_year">שנה"ל הבאה</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job1Requirements">דרישות נוספות למשרה</label>
+                        <textarea id="job1Requirements" name="job1Requirements" rows="2"
+                            placeholder="ניסיון נדרש, תעודות, שפות וכו'"></textarea>
+                    </div>
+
+                    <!-- Job Opening 2 (Optional) -->
+                    <h3 class="form-section-title">משרה מבוקשת #2 (אופציונלי)</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="job2Subject">מקצוע הוראה</label>
+                            <select id="job2Subject" name="job2Subject">
+                                <option value="">בחר/י מקצוע</option>
+                                <option value="math">מתמטיקה</option>
+                                <option value="english">אנגלית</option>
+                                <option value="arabic">ערבית</option>
+                                <option value="hebrew">עברית</option>
+                                <option value="science">מדעים</option>
+                                <option value="physics">פיזיקה</option>
+                                <option value="chemistry">כימיה</option>
+                                <option value="biology">ביולוגיה</option>
+                                <option value="history">היסטוריה</option>
+                                <option value="geography">גיאוגרפיה</option>
+                                <option value="literature">ספרות</option>
+                                <option value="art">אמנות</option>
+                                <option value="music">מוזיקה</option>
+                                <option value="pe">חינוך גופני</option>
+                                <option value="special_ed">חינוך מיוחד</option>
+                                <option value="computer">מחשבים</option>
+                                <option value="other">אחר</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="job2AgeGroup">שכבת גיל</label>
+                            <select id="job2AgeGroup" name="job2AgeGroup">
+                                <option value="">בחר/י</option>
+                                <option value="elementary">יסודי (א'-ו')</option>
+                                <option value="middle">חט"ב (ז'-ט')</option>
+                                <option value="high">תיכון (י'-י"ב)</option>
+                                <option value="all">כל השכבות</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="job2Percentage">אחוז משרה</label>
+                            <select id="job2Percentage" name="job2Percentage">
+                                <option value="">בחר/י</option>
+                                <option value="100">משרה מלאה (100%)</option>
+                                <option value="75">75%</option>
+                                <option value="50">חצי משרה (50%)</option>
+                                <option value="33">שליש משרה (33%)</option>
+                                <option value="25">25%</option>
+                                <option value="flexible">גמיש</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="job2Requirements">דרישות נוספות</label>
+                            <input type="text" id="job2Requirements" name="job2Requirements"
+                                placeholder="דרישות למשרה השנייה">
+                        </div>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <h3 class="form-section-title">מידע נוסף</h3>
+                    <div class="form-group">
+                        <label for="hiringNotes">הערות נוספות</label>
+                        <textarea id="hiringNotes" name="notes" rows="3"
+                            placeholder="מידע נוסף שחשוב לנו לדעת..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">שלח בקשה</button>
+                </form>
+            </div>
+
             <!-- Success Message -->
             <div id="successMessage" class="success-message hidden">
                 <div class="success-icon">✅</div>
@@ -477,6 +681,12 @@
         document.getElementById('schoolPartnerForm').addEventListener('submit', (e) => {
             e.preventDefault();
             submitForm('school_partners', e.target);
+        });
+
+        // School hiring form
+        document.getElementById('schoolHiringForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitForm('school_hiring_requests', e.target);
         });
     </script>
 
