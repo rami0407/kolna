@@ -50,136 +50,364 @@
 
             <!-- Registration Type Selection -->
             <div class="registration-tabs">
-                <button class="reg-tab-btn active" data-form="teacher">👩‍🏫 אני מורה מחפש/ת עבודה</button>
-                <button class="reg-tab-btn" data-form="school-partner">🏫 בית ספר מעוניין בשותפות</button>
-                <button class="reg-tab-btn" data-form="school-hiring">📚 בית ספר מחפש מורים</button>
+                <button class="reg-tab-btn active" data-form="teacher">👩‍🏫 מורה מחפש/ת עבודה</button>
+                <button class="reg-tab-btn" data-form="school-partner">🏫 בית ספר מעוניין בחיים משותפים</button>
             </div>
 
-            <!-- Teacher Registration Form -->
+            <!-- ===== TEACHER REGISTRATION FORM ===== -->
             <div id="teacher" class="reg-form-container active">
-                <h2>הרשמה למורים</h2>
-                <p>מורות ומורים המעוניינים להצטרף למאגר המורים שלנו</p>
+                <h2>📋 טופס הרשמה למורים</h2>
+                <p>מורות ומורים המעוניינים להצטרף למאגר המורים שלנו ולעבוד בבתי ספר יהודיים</p>
+
                 <form id="teacherForm" class="registration-form">
+                    <!-- Personal Information -->
+                    <h3 class="form-section-title">פרטים אישיים</h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="teacherName">שם מלא *</label>
-                            <input type="text" id="teacherName" name="name" required placeholder="הכנס/י את שמך המלא">
+                            <label for="teacherFirstName">שם פרטי *</label>
+                            <input type="text" id="teacherFirstName" name="firstName" required placeholder="שם פרטי">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherLastName">שם משפחה *</label>
+                            <input type="text" id="teacherLastName" name="lastName" required placeholder="שם משפחה">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherId">תעודת זהות *</label>
+                            <input type="text" id="teacherId" name="idNumber" required placeholder="מספר ת.ז.">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherBirthDate">תאריך לידה *</label>
+                            <input type="date" id="teacherBirthDate" name="birthDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherGender">מגדר *</label>
+                            <select id="teacherGender" name="gender" required>
+                                <option value="">בחר/י</option>
+                                <option value="male">זכר</option>
+                                <option value="female">נקבה</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherCity">עיר מגורים *</label>
+                            <input type="text" id="teacherCity" name="city" required placeholder="עיר מגורים">
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <h3 class="form-section-title">פרטי התקשרות</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherPhone">טלפון נייד *</label>
+                            <input type="tel" id="teacherPhone" name="phone" required placeholder="050-000-0000">
                         </div>
                         <div class="form-group">
                             <label for="teacherEmail">אימייל *</label>
                             <input type="email" id="teacherEmail" name="email" required placeholder="example@email.com">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="teacherAddress">כתובת מלאה</label>
+                        <input type="text" id="teacherAddress" name="address" placeholder="רחוב, מספר בית, עיר">
+                    </div>
+
+                    <!-- Academic Background -->
+                    <h3 class="form-section-title">רקע אקדמי</h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="teacherPhone">טלפון *</label>
-                            <input type="tel" id="teacherPhone" name="phone" required placeholder="050-000-0000">
+                            <label for="teacherDegree">תואר אקדמי *</label>
+                            <select id="teacherDegree" name="degree" required>
+                                <option value="">בחר/י תואר</option>
+                                <option value="bachelor">תואר ראשון (B.A/B.Ed)</option>
+                                <option value="master">תואר שני (M.A/M.Ed)</option>
+                                <option value="phd">דוקטורט (Ph.D)</option>
+                                <option value="diploma">תעודת הוראה</option>
+                                <option value="other">אחר</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="teacherSubject">תחום הוראה *</label>
-                            <input type="text" id="teacherSubject" name="subject" required
-                                placeholder="מתמטיקה, אנגלית, וכו'">
+                            <label for="teacherInstitution">מוסד לימודים</label>
+                            <input type="text" id="teacherInstitution" name="institution"
+                                placeholder="שם האוניברסיטה/מכללה">
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="teacherExperience">שנות ניסיון</label>
-                        <input type="number" id="teacherExperience" name="experience" min="0"
-                            placeholder="מספר שנות ניסיון">
+                        <label for="teacherCertificate">תעודת הוראה *</label>
+                        <select id="teacherCertificate" name="teachingCertificate" required>
+                            <option value="">בחר/י</option>
+                            <option value="yes">יש לי תעודת הוראה</option>
+                            <option value="in_progress">בתהליך קבלת תעודה</option>
+                            <option value="no">אין לי תעודת הוראה</option>
+                        </select>
                     </div>
+
+                    <!-- Teaching Specialization -->
+                    <h3 class="form-section-title">התמחות הוראה</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherSubject">מקצוע הוראה ראשי *</label>
+                            <select id="teacherSubject" name="mainSubject" required>
+                                <option value="">בחר/י מקצוע</option>
+                                <option value="math">מתמטיקה</option>
+                                <option value="english">אנגלית</option>
+                                <option value="arabic">ערבית</option>
+                                <option value="hebrew">עברית</option>
+                                <option value="science">מדעים</option>
+                                <option value="physics">פיזיקה</option>
+                                <option value="chemistry">כימיה</option>
+                                <option value="biology">ביולוגיה</option>
+                                <option value="history">היסטוריה</option>
+                                <option value="geography">גיאוגרפיה</option>
+                                <option value="literature">ספרות</option>
+                                <option value="art">אמנות</option>
+                                <option value="music">מוזיקה</option>
+                                <option value="pe">חינוך גופני</option>
+                                <option value="special_ed">חינוך מיוחד</option>
+                                <option value="computer">מחשבים</option>
+                                <option value="other">אחר</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherSubject2">מקצוע הוראה משני</label>
+                            <input type="text" id="teacherSubject2" name="secondarySubject"
+                                placeholder="מקצוע נוסף (אם יש)">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherAgeGroup">שכבת גיל מועדפת *</label>
+                            <select id="teacherAgeGroup" name="ageGroup" required>
+                                <option value="">בחר/י</option>
+                                <option value="elementary">יסודי (א'-ו')</option>
+                                <option value="middle">חט"ב (ז'-ט')</option>
+                                <option value="high">תיכון (י'-י"ב)</option>
+                                <option value="all">כל השכבות</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherExperience">שנות ניסיון בהוראה *</label>
+                            <select id="teacherExperience" name="experience" required>
+                                <option value="">בחר/י</option>
+                                <option value="0">ללא ניסיון</option>
+                                <option value="1-2">1-2 שנים</option>
+                                <option value="3-5">3-5 שנים</option>
+                                <option value="6-10">6-10 שנים</option>
+                                <option value="10+">מעל 10 שנים</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <h3 class="form-section-title">שפות</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherHebrew">רמת עברית *</label>
+                            <select id="teacherHebrew" name="hebrewLevel" required>
+                                <option value="">בחר/י רמה</option>
+                                <option value="native">שפת אם</option>
+                                <option value="fluent">שליטה מלאה</option>
+                                <option value="good">טובה</option>
+                                <option value="basic">בסיסית</option>
+                                <option value="none">אין</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherArabic">רמת ערבית *</label>
+                            <select id="teacherArabic" name="arabicLevel" required>
+                                <option value="">בחר/י רמה</option>
+                                <option value="native">שפת אם</option>
+                                <option value="fluent">שליטה מלאה</option>
+                                <option value="good">טובה</option>
+                                <option value="basic">בסיסית</option>
+                                <option value="none">אין</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        <label for="teacherMessage">מידע נוסף</label>
-                        <textarea id="teacherMessage" name="message" rows="3"
-                            placeholder="ספר/י לנו קצת על עצמך..."></textarea>
+                        <label for="teacherEnglish">רמת אנגלית</label>
+                        <select id="teacherEnglish" name="englishLevel">
+                            <option value="">בחר/י רמה</option>
+                            <option value="native">שפת אם</option>
+                            <option value="fluent">שליטה מלאה</option>
+                            <option value="good">טובה</option>
+                            <option value="basic">בסיסית</option>
+                            <option value="none">אין</option>
+                        </select>
                     </div>
+
+                    <!-- Job Preferences -->
+                    <h3 class="form-section-title">העדפות עבודה</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherJobPercent">אחוז משרה מבוקש *</label>
+                            <select id="teacherJobPercent" name="jobPercentage" required>
+                                <option value="">בחר/י</option>
+                                <option value="100">משרה מלאה (100%)</option>
+                                <option value="75">75%</option>
+                                <option value="50">חצי משרה (50%)</option>
+                                <option value="25">25%</option>
+                                <option value="flexible">גמיש</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherAvailability">זמינות להתחיל</label>
+                            <select id="teacherAvailability" name="availability">
+                                <option value="">בחר/י</option>
+                                <option value="immediately">מיידית</option>
+                                <option value="1month">תוך חודש</option>
+                                <option value="next_year">שנה"ל הבאה</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacherPreferredArea">אזור עבודה מועדף</label>
+                        <input type="text" id="teacherPreferredArea" name="preferredArea"
+                            placeholder="מרכז, צפון, דרום...">
+                    </div>
+
+                    <!-- Additional Information -->
+                    <h3 class="form-section-title">מידע נוסף</h3>
+                    <div class="form-group">
+                        <label for="teacherAbout">ספר/י לנו על עצמך</label>
+                        <textarea id="teacherAbout" name="about" rows="4"
+                            placeholder="רקע קצר, מוטיבציה, ציפיות..."></textarea>
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-full">שלח הרשמה</button>
                 </form>
             </div>
 
-            <!-- School Partnership Form -->
+            <!-- ===== SCHOOL PARTNERSHIP FORM ===== -->
             <div id="school-partner" class="reg-form-container">
-                <h2>בית ספר מעוניין בשותפות</h2>
-                <p>בתי ספר המעוניינים להצטרף לפרויקט החיים המשותפים</p>
-                <form id="schoolPartnerForm" class="registration-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="partnerSchoolName">שם בית הספר *</label>
-                            <input type="text" id="partnerSchoolName" name="schoolName" required
-                                placeholder="שם בית הספר">
-                        </div>
-                        <div class="form-group">
-                            <label for="partnerSchoolLocation">עיר/יישוב *</label>
-                            <input type="text" id="partnerSchoolLocation" name="location" required
-                                placeholder="עיר או יישוב">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="partnerContactName">שם איש קשר *</label>
-                            <input type="text" id="partnerContactName" name="contactName" required
-                                placeholder="שם מנהל/ת או רכז/ת">
-                        </div>
-                        <div class="form-group">
-                            <label for="partnerContactEmail">אימייל *</label>
-                            <input type="email" id="partnerContactEmail" name="email" required
-                                placeholder="example@school.edu">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="partnerContactPhone">טלפון *</label>
-                        <input type="tel" id="partnerContactPhone" name="phone" required placeholder="050-000-0000">
-                    </div>
-                    <div class="form-group">
-                        <label for="partnerMessage">מידע נוסף</label>
-                        <textarea id="partnerMessage" name="message" rows="3"
-                            placeholder="ספרו לנו על בית הספר ועל הציפיות שלכם מהשותפות..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">שלח בקשה</button>
-                </form>
-            </div>
+                <h2>🏫 טופס הרשמה לבתי ספר</h2>
+                <p>בתי ספר המעוניינים להצטרף לפרויקט החיים המשותפים ולקלוט מורים מהחברה הערבית</p>
 
-            <!-- School Hiring Form -->
-            <div id="school-hiring" class="reg-form-container">
-                <h2>בית ספר מחפש מורים</h2>
-                <p>בתי ספר המעוניינים לקלוט מורים מהחברה הערבית</p>
-                <form id="schoolHiringForm" class="registration-form">
+                <form id="schoolPartnerForm" class="registration-form">
+                    <!-- School Information -->
+                    <h3 class="form-section-title">פרטי בית הספר</h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="hiringSchoolName">שם בית הספר *</label>
-                            <input type="text" id="hiringSchoolName" name="schoolName" required
-                                placeholder="שם בית הספר">
+                            <label for="schoolName">שם בית הספר *</label>
+                            <input type="text" id="schoolName" name="schoolName" required placeholder="שם בית הספר">
                         </div>
                         <div class="form-group">
-                            <label for="hiringSchoolLocation">עיר/יישוב *</label>
-                            <input type="text" id="hiringSchoolLocation" name="location" required
-                                placeholder="עיר או יישוב">
+                            <label for="schoolType">סוג בית הספר *</label>
+                            <select id="schoolType" name="schoolType" required>
+                                <option value="">בחר/י</option>
+                                <option value="elementary">יסודי</option>
+                                <option value="middle">חט"ב</option>
+                                <option value="high">תיכון</option>
+                                <option value="comprehensive">מקיף (יסודי-תיכון)</option>
+                            </select>
                         </div>
                     </div>
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="hiringContactName">שם איש קשר *</label>
-                            <input type="text" id="hiringContactName" name="contactName" required
-                                placeholder="שם מנהל/ת או רכז/ת">
+                            <label for="schoolCity">עיר *</label>
+                            <input type="text" id="schoolCity" name="city" required placeholder="עיר">
                         </div>
                         <div class="form-group">
-                            <label for="hiringContactEmail">אימייל *</label>
-                            <input type="email" id="hiringContactEmail" name="email" required
-                                placeholder="example@school.edu">
+                            <label for="schoolAddress">כתובת מלאה *</label>
+                            <input type="text" id="schoolAddress" name="address" required placeholder="רחוב ומספר">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="hiringContactPhone">טלפון *</label>
-                        <input type="tel" id="hiringContactPhone" name="phone" required placeholder="050-000-0000">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="schoolStudents">מספר תלמידים</label>
+                            <input type="number" id="schoolStudents" name="studentCount"
+                                placeholder="מספר תלמידים בבית הספר">
+                        </div>
+                        <div class="form-group">
+                            <label for="schoolSector">מגזר *</label>
+                            <select id="schoolSector" name="sector" required>
+                                <option value="">בחר/י</option>
+                                <option value="state">ממלכתי</option>
+                                <option value="state_religious">ממלכתי-דתי</option>
+                                <option value="independent">עצמאי/חרדי</option>
+                                <option value="arab">ערבי</option>
+                                <option value="druze">דרוזי</option>
+                                <option value="mixed">מעורב</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="hiringPosition">תפקיד/מקצוע מבוקש *</label>
-                        <input type="text" id="hiringPosition" name="position" required
-                            placeholder="מורה לאנגלית, מתמטיקה וכו'">
+
+                    <!-- Principal Information -->
+                    <h3 class="form-section-title">פרטי המנהל/ת</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="principalName">שם המנהל/ת *</label>
+                            <input type="text" id="principalName" name="principalName" required placeholder="שם מלא">
+                        </div>
+                        <div class="form-group">
+                            <label for="principalPhone">טלפון המנהל/ת *</label>
+                            <input type="tel" id="principalPhone" name="principalPhone" required
+                                placeholder="050-000-0000">
+                        </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="hiringMessage">מידע נוסף</label>
-                        <textarea id="hiringMessage" name="message" rows="3"
-                            placeholder="פרטים נוספים על המשרה והדרישות..."></textarea>
+                        <label for="principalEmail">אימייל המנהל/ת *</label>
+                        <input type="email" id="principalEmail" name="principalEmail" required
+                            placeholder="principal@school.edu">
                     </div>
+
+                    <!-- Contact Person -->
+                    <h3 class="form-section-title">איש קשר (אם שונה מהמנהל)</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactName">שם איש קשר</label>
+                            <input type="text" id="contactName" name="contactName" placeholder="שם מלא">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactRole">תפקיד</label>
+                            <input type="text" id="contactRole" name="contactRole" placeholder="רכז/ת, סגן/ית, וכו'">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactPhone">טלפון איש קשר</label>
+                            <input type="tel" id="contactPhone" name="contactPhone" placeholder="050-000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">אימייל איש קשר</label>
+                            <input type="email" id="contactEmail" name="contactEmail" placeholder="contact@school.edu">
+                        </div>
+                    </div>
+
+                    <!-- Teacher Needs -->
+                    <h3 class="form-section-title">צרכי כ"א</h3>
+                    <div class="form-group">
+                        <label for="positionsNeeded">תפקידים/מקצועות מבוקשים</label>
+                        <textarea id="positionsNeeded" name="positionsNeeded" rows="3"
+                            placeholder="פרטו אילו מורים אתם מחפשים (מקצועות, אחוזי משרה, וכו')"></textarea>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <h3 class="form-section-title">מידע נוסף</h3>
+                    <div class="form-group">
+                        <label for="schoolMotivation">מדוע אתם מעוניינים להצטרף לפרויקט?</label>
+                        <textarea id="schoolMotivation" name="motivation" rows="4"
+                            placeholder="ספרו לנו על החזון שלכם והציפיות מהשותפות..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="schoolWebsite">אתר בית הספר (אם יש)</label>
+                        <input type="url" id="schoolWebsite" name="website" placeholder="https://www.school.edu">
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-full">שלח בקשה</button>
                 </form>
             </div>
@@ -221,7 +449,7 @@
         });
 
         // Form submission handlers
-        async function submitForm(formId, collectionName, formElement) {
+        async function submitForm(collectionName, formElement) {
             const formData = new FormData(formElement);
             const data = {};
             formData.forEach((value, key) => {
@@ -254,21 +482,30 @@
         // Teacher form
         document.getElementById('teacherForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            submitForm('teacher', 'teachers', e.target);
+            submitForm('teachers', e.target);
         });
 
         // School partner form
         document.getElementById('schoolPartnerForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            submitForm('school-partner', 'school_partners', e.target);
-        });
-
-        // School hiring form
-        document.getElementById('schoolHiringForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            submitForm('school-hiring', 'schools', e.target);
+            submitForm('school_partners', e.target);
         });
     </script>
+
+    <style>
+        .form-section-title {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .form-section-title:first-of-type {
+            margin-top: 0;
+        }
+    </style>
 </body>
 
 </html>
