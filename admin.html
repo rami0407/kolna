@@ -66,7 +66,34 @@
             </div>
 
             <div id="schools" class="tab-content">
-                <h2 class="section-title">المدراس التي بحاجة لموظفين</h2>
+                <h2 class="section-title">إدارة المدارس الشريكة</h2>
+
+                <!-- Add School Form -->
+                <div class="add-school-form">
+                    <h3>➕ إضافة مدرسة جديدة</h3>
+                    <form id="addSchoolForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="schoolName">اسم المدرسة *</label>
+                                <input type="text" id="schoolName" name="schoolName" required
+                                    placeholder="مثال: مدرسة السلام">
+                            </div>
+                            <div class="form-group">
+                                <label for="schoolLocation">الموقع *</label>
+                                <input type="text" id="schoolLocation" name="schoolLocation" required
+                                    placeholder="مثال: تل أبيب">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="schoolDescription">وصف (اختياري)</label>
+                            <textarea id="schoolDescription" name="schoolDescription" rows="2"
+                                placeholder="معلومات إضافية عن المدرسة..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">إضافة المدرسة</button>
+                    </form>
+                </div>
+
+                <h3 style="margin-bottom: 1rem;">📋 قائمة المدارس المضافة</h3>
                 <div id="schoolsContainer" class="messages-container">
                     <div class="loading-message">جاري تحميل قائمة المدارس...</div>
                 </div>

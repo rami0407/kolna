@@ -27,7 +27,7 @@ checkAuthState((user) => {
     // Load messages
     loadMessages();
     loadTeachers();
-    loadSchools();
+    loadPartnerSchools();
 
     // Tab Logic
     const tabs = document.querySelectorAll('.tab-btn');
@@ -226,3 +226,102 @@ function escapeHtml(text) {
     };
     return text.toString().replace(/[&<>"']/g, (m) => map[m]);
 }
+
+// Add School Form Handler
+const addSchoolForm = document.getElementById('addSchoolForm');
+if (addSchoolForm) {
+    addSchoolForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const schoolName = document.getElementById('schoolName').value.trim();
+        const schoolLocation = document.getElementById('schoolLocation').value.trim();
+        const schoolDescription = document.getElementById('schoolDescription').value.trim();
+
+        const submitBtn = addSchoolForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'جاري الإضافة...';
+        submitBtn.disabled = true;
+
+        try {
+            await firebaseDB.collection('partner_schools').add({
+                name: schoolName,
+                location: schoolLocation,
+                description: schoolDescription,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            alert('تمت إضافة المدرسة بنجاح!');
+            addSchoolForm.reset();
+            loadPartnerSchools(); // Reload the list
+
+        } catch (error) {
+            console.error('Error adding school:', error);
+            alert('حدث خطأ أثناء إضافة المدرسة');
+        } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+}
+
+// Load Partner Schools (for admin dashboard display)
+async function loadPartnerSchools() {
+    const container = document.getElementById('schoolsContainer');
+    if (!container) return;
+
+    try {
+        const snapshot = await firebaseDB.collection('partner_schools').orderBy('createdAt', 'desc').get();
+
+        if (snapshot.empty) {
+            container.innerHTML = '<div class="loading-message">لا توجد مدارس مضافة حتى الآن</div>';
+            return;
+        }
+
+        let tableHTML = `
+            <table class="messages-table">
+                <thead>
+                    <tr>
+                        <th>اسم المدرسة</th>
+                        <th>الموقع</th>
+                        <th>الوصف</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            tableHTML += `
+                <tr>
+                    <td>${escapeHtml(data.name || '-')}</td>
+                    <td>${escapeHtml(data.location || '-')}</td>
+                    <td>${escapeHtml(data.description || '-')}</td>
+                    <td><button class="btn-delete" onclick="deleteSchool('${doc.id}')">حذف</button></td>
+                </tr>
+            `;
+        });
+
+        tableHTML += `</tbody></table>`;
+        container.innerHTML = tableHTML;
+
+    } catch (error) {
+        console.error('Error loading partner schools:', error);
+        container.innerHTML = '<div class="loading-message">حدث خطأ أثناء تحميل المدارس</div>';
+    }
+}
+
+// Delete School
+async function deleteSchool(schoolId) {
+    if (!confirm('هل أنت متأكد من حذف هذه المدرسة؟')) return;
+
+    try {
+        await firebaseDB.collection('partner_schools').doc(schoolId).delete();
+        alert('تم حذف المدرسة بنجاح');
+        loadPartnerSchools();
+    } catch (error) {
+        console.error('Error deleting school:', error);
+        alert('حدث خطأ أثناء الحذف');
+    }
+}
+

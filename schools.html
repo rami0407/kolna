@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="בתי ספר שותפים - כולנה יחד">
+    <title>בתי ספר שותפים - כולנה יחד</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <a href="index.html"
+                        style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="logo-icon">🤝</span>
+                        <span class="logo-text">קולנו יחד</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">בית</a></li>
+                    <li><a href="schools.html" class="nav-link active">בתי ספר שותפים</a></li>
+                    <li><a href="index.html#contact" class="nav-link">צור קשר</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Schools Section -->
+    <section class="schools-page-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">השותפים שלנו</span>
+                <h1 class="section-title">בתי ספר שהצטרפו לפרויקט</h1>
+                <p class="section-subtitle">בתי הספר שמאמינים בחזון שלנו ופועלים יחד איתנו לבניית חברה משותפת</p>
+            </div>
+
+            <div id="schoolsGrid" class="schools-grid">
+                <div class="loading-message">جاري تحميل قائمة المدارس...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 קולנו יחד. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="firebase-config.js"></script>
+    <script>
+        // Load and display schools
+        async function loadSchools() {
+            const schoolsGrid = document.getElementById('schoolsGrid');
+
+            try {
+                const snapshot = await firebaseDB.collection('partner_schools').orderBy('createdAt', 'desc').get();
+
+                if (snapshot.empty) {
+                    schoolsGrid.innerHTML = '<div class="no-schools-message">עדיין לא נוספו בתי ספר. בקרוב נוסיף את השותפים שלנו!</div>';
+                    return;
+                }
+
+                let html = '';
+                snapshot.forEach((doc) => {
+                    const school = doc.data();
+                    html += `
+                        <div class="school-card">
+                            <div class="school-icon">🏫</div>
+                            <h3 class="school-name">${escapeHtml(school.name)}</h3>
+                            <p class="school-location">📍 ${escapeHtml(school.location || '')}</p>
+                            ${school.description ? `<p class="school-description">${escapeHtml(school.description)}</p>` : ''}
+                        </div>
+                    `;
+                });
+
+                schoolsGrid.innerHTML = html;
+
+            } catch (error) {
+                console.error('Error loading schools:', error);
+                schoolsGrid.innerHTML = '<div class="loading-message">حدث خطأ أثناء تحميل المدارس</div>';
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.toString().replace(/[&<>"']/g, (m) => map[m]);
+        }
+
+        // Load schools on page load
+        loadSchools();
+    </script>
+</body>
+
+</html>
