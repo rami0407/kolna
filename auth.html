@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="تسجيل الدخول - قولنا يحد">
+    <title>تسجيل الدخول - قولنا يحد</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-icon">🤝</span>
+                    <span class="logo-text">קולנו יחד</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">الصفحة الرئيسية</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h1 class="auth-title">مرحباً بك</h1>
+                    <p class="auth-subtitle">انضم إلى مجتمع قولنا يحد</p>
+                </div>
+
+                <!-- رسائل النجاح والأخطاء -->
+                <div id="authMessage" class="auth-message hidden"></div>
+
+                <!-- نموذج تسجيل الدخول -->
+                <div id="loginForm" class="auth-form-container">
+                    <h2 class="form-title">تسجيل الدخول</h2>
+                    <form id="loginFormElement" class="auth-form">
+                        <div class="form-group">
+                            <label for="loginEmail">البريد الإلكتروني</label>
+                            <input type="email" id="loginEmail" name="email" required placeholder="example@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">كلمة المرور</label>
+                            <input type="password" id="loginPassword" name="password" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full auth-btn">
+                            <span class="btn-text">تسجيل الدخول</span>
+                            <span class="btn-loader hidden">جاري التحميل...</span>
+                        </button>
+                    </form>
+                    <p class="auth-switch">
+                        ليس لديك حساب؟
+                        <a href="#" id="showSignup" class="auth-link">إنشاء حساب جديد</a>
+                    </p>
+                </div>
+
+                <!-- نموذج التسجيل -->
+                <div id="signupForm" class="auth-form-container hidden">
+                    <h2 class="form-title">إنشاء حساب جديد</h2>
+                    <form id="signupFormElement" class="auth-form">
+                        <div class="form-group">
+                            <label for="signupName">الاسم الكامل</label>
+                            <input type="text" id="signupName" name="name" required placeholder="أدخل اسمك الكامل">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">البريد الإلكتروني</label>
+                            <input type="email" id="signupEmail" name="email" required placeholder="example@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">كلمة المرور</label>
+                            <input type="password" id="signupPassword" name="password" required placeholder="••••••••"
+                                minlength="6">
+                            <small class="form-hint">يجب أن تكون 6 أحرف على الأقل</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPasswordConfirm">تأكيد كلمة المرور</label>
+                            <input type="password" id="signupPasswordConfirm" name="passwordConfirm" required
+                                placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full auth-btn">
+                            <span class="btn-text">إنشاء حساب</span>
+                            <span class="btn-loader hidden">جاري التحميل...</span>
+                        </button>
+                    </form>
+                    <p class="auth-switch">
+                        لديك حساب بالفعل؟
+                        <a href="#" id="showLogin" class="auth-link">تسجيل الدخول</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 קולנו יחד - قولنا يحد. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

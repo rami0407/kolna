@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="لوحة التحكم - قولنا يحد">
+    <title>لوحة التحكم - قولנו יחד</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-icon">🤝</span>
+                    <span class="logo-text">קולנו יחד</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">الصفحة الرئيسية</a></li>
+                    <li><a href="admin.html" class="nav-link active">لوحة التحكم</a></li>
+                </ul>
+                <div id="userInfo" class="user-info">
+                    <span id="userName" class="user-name"></span>
+                    <button id="logoutBtn" class="btn-logout">התנתק</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Section -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-header">
+                <h1 class="admin-title">لوحة التحكم</h1>
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="messages">الرسائل</button>
+                    <button class="tab-btn" data-tab="teachers">المعلمين المسجلين</button>
+                    <button class="tab-btn" data-tab="schools">المدراس</button>
+                </div>
+            </div>
+
+            <div id="messages" class="tab-content active">
+                <h2 class="section-title">الرسائل المستلمة</h2>
+                <div id="messagesContainer" class="messages-container">
+                    <div class="loading-message">جاري تحميل الرسائل...</div>
+                </div>
+            </div>
+
+            <div id="teachers" class="tab-content">
+                <h2 class="section-title">المعلمين المسجلين</h2>
+                <div id="teachersContainer" class="messages-container">
+                    <div class="loading-message">جاري تحميل قائمة المعلمين...</div>
+                </div>
+            </div>
+
+            <div id="schools" class="tab-content">
+                <h2 class="section-title">المدراس التي بحاجة لموظفين</h2>
+                <div id="schoolsContainer" class="messages-container">
+                    <div class="loading-message">جاري تحميل قائمة المدارس...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 קולנו יחד - قولنا يحد. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

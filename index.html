@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="קולנו יחד - ארגון המקדם שיתוף פעולה וקהילתיות בחברה הישראלית">
+    <title>קולנו יחד - ביחד אנחנו חזקים יותר</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-icon">🤝</span>
+                    <span class="logo-text">קולנו יחד</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active">בית</a></li>
+                    <li><a href="#vision" class="nav-link">החזון שלנו</a></li>
+                    <li><a href="#mission" class="nav-link">המשימה</a></li>
+                    <li><a href="#goals" class="nav-link">מטרות</a></li>
+                    <li><a href="#contact" class="nav-link">צור קשר</a></li>
+                    <li><a href="admin.html" class="nav-link" id="dashboardLink">لوحة التحكم</a></li>
+                    <li><a href="auth.html" class="nav-link" id="authLink">התחבר</a></li>
+                </ul>
+                <div id="userInfo" class="user-info hidden">
+                    <span id="userName" class="user-name"></span>
+                    <button id="logoutBtn" class="btn-logout">התנתק</button>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">ביחד</span>
+                    <span class="title-line gradient-text">אנחנו חזקים יותר</span>
+                </h1>
+                <p class="hero-subtitle">
+                    כולנה יחד – בונים אמון, מכילים הבדל, יוצרים עתיד משותף.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#vision" class="btn btn-primary">גלה עוד</a>
+                    <a href="#contact" class="btn btn-secondary">הצטרף אלינו</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>גלול למטה</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision" class="vision-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">החזון שלנו</span>
+                <h2 class="section-title">לאן אנחנו שואפים</h2>
+            </div>
+            <div class="vision-content-text"
+                style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.2rem; line-height: 1.8;">
+                <p>
+                    אנו מאמינים בחברה ישראלית משותפת, שוויונית ומכבדת, שבה יהודים וערבים חיים, לומדים ופועלים זה לצד זה.
+                </p>
+                <p>
+                    "כולנה יחד" פועל ליצירת גשרים של הבנה, שותפות ודיאלוג בין הקהילות דרך מערכת החינוך – מתוך אמונה כי
+                    הכיתה היא המקום שבו נבנה העתיד המשותף שלנו.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-text">
+                    <span class="section-tag">מי אנחנו?</span>
+                    <h2 class="section-title">ארגון חינוכי-חברתי</h2>
+                    <p class="who-we-are-text" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                        "כולנה יחד" הוא ארגון חינוכי-חברתי, יהודי-ערבי, שמחבר בין בתי ספר, מורים, תלמידים ומשפחות משתי
+                        החברות – במטרה לחולל שינוי עומק בתפיסות, בדימויים ובמערכות היחסים.
+                        <br><br>
+                        אנו פועלים לשילוב מורות ומורים מהחברה הערבית בבתי ספר יהודיים, תוך קידום מרחבים של שותפות
+                        חינוכית בין בתי ספר, וביסוס של שיח בין-תרבותי, סובלני ומכבד.
+                    </p>
+                </div>
+                <div class="mission-visual">
+                    <div class="visual-card card-1">
+                        <div class="card-content">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">משתתפים בפעילויות</div>
+                        </div>
+                    </div>
+                    <div class="visual-card card-2">
+                        <div class="card-content">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">פרויקטים קהילתיים</div>
+                        </div>
+                    </div>
+                    <div class="visual-card card-3">
+                        <div class="card-content">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">קהילות שותפות</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals Section -->
+    <section id="goals" class="goals-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">המטרות שלנו</span>
+                <h2 class="section-title">איך אנחנו מגשימים את החזון</h2>
+            </div>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <div class="goal-icon">👩‍🏫</div>
+                    <h3>שילוב מורים</h3>
+                    <p>שילוב מורים ערבים במערכת החינוך היהודית – ליצירת היכרות, פירוק דעות קדומות והעשרת החינוך
+                        הרב-תרבותי.</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">🏫</div>
+                    <h3>שותפויות בתי ספר</h3>
+                    <p>שותפויות בין בתי ספר יהודים וערבים – באמצעות פרויקטים חינוכיים, סדנאות, ימי שיא וביקורים הדדיים.
+                    </p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">📚</div>
+                    <h3>תכנים פדגוגיים</h3>
+                    <p>פיתוח תכנים וכלים פדגוגיים לחינוך לדו-קיום – הכשרות לצוותים, חומרי לימוד ודיאלוג מקצועי בין
+                        קהילות חינוך.</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">👨‍👩‍👧‍👦</div>
+                    <h3>קהילת שותפים</h3>
+                    <p>בניית קהילת שותפים יהודית-ערבית – של מורים, מנהלים, הורים ותלמידים הפועלים יחד לחיזוק החיים
+                        המשותפים.</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-icon">🏛️</div>
+                    <h3>השפעה על מדיניות</h3>
+                    <p>השפעה על מדיניות חינוכית וציבורית – מתוך ניסיון להרחיב את מעגלי השפעה ולקדם שוויון והכלה במערכת
+                        החינוך.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <span class="section-tag">צור קשר</span>
+                    <h2 class="section-title">בואו נעבוד ביחד</h2>
+                    <p class="contact-description">
+                        מעוניינים להצטרף אלינו? יש לכם רעיון לפרויקט משותף?
+                        נשמח לשמוע מכם ולבנות ביחד עתיד טוב יותר.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>אימייל</h4>
+                                <a href="mailto:info@kolanuyahad.org">info@kolanuyahad.org</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <h4>טלפון</h4>
+                                <a href="tel:+972501234567">050-123-4567</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>כתובת</h4>
+                                <p>תל אביב, ישראל</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">שם מלא</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">אימייל</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">הודעה</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">שלח הודעה</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">🤝</span>
+                        <span class="logo-text">קולנו יחד</span>
+                    </div>
+                    <p>ביחד אנחנו חזקים יותר</p>
+                </div>
+                <div class="footer-links">
+                    <h4>קישורים מהירים</h4>
+                    <ul>
+                        <li><a href="#home">בית</a></li>
+                        <li><a href="#vision">החזון שלנו</a></li>
+                        <li><a href="#mission">המשימה</a></li>
+                        <li><a href="#goals">מטרות</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>עקבו אחרינו</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 קולנו יחד. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
