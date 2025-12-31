@@ -460,7 +460,9 @@
 
             } catch (error) {
                 console.error('Error submitting form:', error);
-                alert('אירעה שגיאה. נסו שוב מאוחר יותר.');
+                console.error('Error code:', error.code);
+                console.error('Error message:', error.message);
+                alert('שגיאה: ' + error.message);
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             }
